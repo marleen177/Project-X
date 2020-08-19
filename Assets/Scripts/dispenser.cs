@@ -8,6 +8,9 @@ public class dispenser : MonoBehaviour
 {
 
     public TextMeshProUGUI txt;
+    public static int herbAmount;
+    public GameObject herbSpawner;
+    public GameObject herb;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +20,12 @@ public class dispenser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        txt.text = herbAmount.ToString();
 
+        if (herbAmount >= 1)
+        {
+            Instantiate(herb, new Vector3(herbSpawner.transform.position.x, herbSpawner.transform.position.y, herbSpawner.transform.position.z), Quaternion.identity);
+        }
     }
     void OnCollisionEnter(Collision col)
     {
@@ -25,10 +33,11 @@ public class dispenser : MonoBehaviour
         {
             Debug.Log("collision works"); //nice
 
-            txt.text = "1";
-
+            herbAmount += 1;
 
             //Destroy(col.gameObject);
         }
     }
+    //void herb;
+
 }
